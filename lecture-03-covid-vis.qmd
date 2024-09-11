@@ -31,9 +31,14 @@ If you want to only look at a specific state, you can do it like this.
 For now, see what you can do just using `ggplot`.
 
 ```{r}
-covid_data_count |> 
-  filter(state == "MA") |> 
-  ggplot(aes(x = date, y = Cases, color = race)) + geom_line()
+#covid_data_count |> 
+#  filter(state == "MA") |> 
+#  ggplot(aes(x = date, y = Cases, color = race)) + geom_line()
+
+ggplot(data = filter(covid_data_count, state == "MA", race != "AIAN" & race != "NHPI")) +
+  geom_line(mapping = aes(x = date, y = Deaths/population)) +
+  facet_wrap(~ race, nrow = 2)
+
 ```
 
 1. After making and refining some plots, pick one and save the code and describe what you observe?
